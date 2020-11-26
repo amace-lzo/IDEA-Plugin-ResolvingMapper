@@ -33,14 +33,16 @@ public class ExportTableAndProcAction extends AnAction {
                 false,true,false,false,false,false
         );
         VirtualFile[] virtualFiles = FileChooser.chooseFiles(fileChooserDescriptor, null, null);
-        String path = virtualFiles[0].toString().split("//")[1] + "MapperInfo.xlsx";
-        try {
-            // export excel file to the path
-            ExcelUtil.exportExcel(mapperInfos, path);
-            Messages.showInfoMessage("Export succeeded", "ExportSucceeded");
-        } catch (Exception ex) {
-            Messages.showErrorDialog("An error occurred while Exporting,please contact us", "ExportError");
-            ex.printStackTrace();
+        if (virtualFiles.length >0 ) {
+            String path = virtualFiles[0].toString().split("//")[1] + "MapperInfo.xlsx";
+            try {
+                // export excel file to the path
+                ExcelUtil.exportExcel(mapperInfos, path);
+                Messages.showInfoMessage("Export succeeded", "ExportSucceeded");
+            } catch (Exception ex) {
+                Messages.showErrorDialog("An error occurred while Exporting,please contact us", "ExportError");
+                ex.printStackTrace();
+            }
         }
     }
 
