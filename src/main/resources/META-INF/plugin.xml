@@ -1,0 +1,38 @@
+<idea-plugin>
+    <id>com.top.mapperResolving</id>
+    <name>Resolving Mapper</name>
+    <vendor email="hljtlzyx@live.com" url="https://github.com/ineedahouse/">gitbub</vendor>
+
+    <description><![CDATA[
+  <h3>Resolving Mapper</h3>
+  <p>This is a plugin to resolve your mapper,and get all tables and procedures of mapper file.Support one file and multiple files.</p>
+  <p>Now you can export excel of all tables and procedures to specific path.</p>
+  <p>Support Tag:select,insert,update,delete,sql,if</p>]]></description>
+
+    <depends>com.intellij.modules.lang</depends>
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+    </extensions>
+
+    <actions>
+        <group id="ResolvingMapper" text="Resolving Mapper" popup="true">
+            <add-to-group group-id="ProjectViewPopupMenu"/>
+            <action id="showTableAndProc" class="com.top.action.ShowTableAndProcAction" text="Show Tables And Procedures"
+                    description="Show all of tables and procedures in mapper xml file">
+                <add-to-group group-id="ProjectViewPopupMenu"/>
+            </action>
+            <action id="exportTableAndProc" class="com.top.action.ExportTableAndProcAction" text="Export Tables And Procedures"
+                    description="Export all of tables and procedures in mapper xml file to excel">
+                <add-to-group group-id="ProjectViewPopupMenu"/>
+            </action>
+        </group>
+        <!-- Add your actions here -->
+    </actions>
+
+</idea-plugin>
