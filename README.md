@@ -34,9 +34,13 @@ tips: In the process You might encounter version incompatibility.  New IDEA vers
 ## Development Environment
 
 IntelliJ IDEA 2019.2.3
+
 Build #IU-192.6817.14, built on September 24, 2019
+
 Runtime version: 1.8.0_221-b11 amd64
+
 VM: Java HotSpot(TM) 64-Bit Server VM by Oracle Corporation
+
 Windows 7 6.1
 
 ### *License*
