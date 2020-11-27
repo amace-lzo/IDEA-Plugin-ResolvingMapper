@@ -12,6 +12,9 @@ import com.intellij.psi.impl.source.xml.XmlFileImpl;
 import com.top.domain.MapperInfo;
 import com.top.utils.ExcelUtil;
 import com.top.utils.MapperUtil;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -34,7 +37,10 @@ public class ExportTableAndProcAction extends AnAction {
         );
         VirtualFile[] virtualFiles = FileChooser.chooseFiles(fileChooserDescriptor, null, null);
         if (virtualFiles.length >0 ) {
-            String path = virtualFiles[0].toString().split("//")[1] + "MapperInfo.xlsx";
+            Date currentTime = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+            String dateNowStr = sdf.format(currentTime);
+            String path = virtualFiles[0].toString().split("//")[1] + "MapperInfo_" + dateNowStr + ".xlsx";
             try {
                 // export excel file to the path
                 ExcelUtil.exportExcel(mapperInfos, path);
