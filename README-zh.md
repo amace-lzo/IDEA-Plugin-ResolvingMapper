@@ -34,9 +34,13 @@ tips: 在这过程中你可能会遇到版本不兼容的问题，尽可能使�
 ## 开发环境
 
 IntelliJ IDEA 2019.2.3
+
 Build #IU-192.6817.14, built on September 24, 2019
+
 Runtime version: 1.8.0_221-b11 amd64
+
 VM: Java HotSpot(TM) 64-Bit Server VM by Oracle Corporation
+
 Windows 7 6.1
 
 ### *License*
