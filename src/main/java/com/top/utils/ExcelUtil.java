@@ -6,9 +6,7 @@ import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 
 import java.io.FileOutputStream;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class ExcelUtil {
@@ -21,7 +19,7 @@ public class ExcelUtil {
     public static void exportExcel(List<MapperInfo> mapperInfos, String path) throws Exception {
 
         SXSSFWorkbook wb = new SXSSFWorkbook(1000);
-        // create sheet
+        // create sheet1
         Sheet sheet = wb.createSheet("MapperInfo");
 
         MapperInfo[] mapperInfos1 = new MapperInfo[mapperInfos.size()];
@@ -101,6 +99,67 @@ public class ExcelUtil {
             count++;
         }
         sheet.setDisplayGridlines(true);
+
+        // create sheet2
+        Sheet sheet2 = wb.createSheet("TableSet");
+        sheet2.setColumnWidth(0, 36 * 256);
+
+        HashSet<String> hashSet = new HashSet<>();
+        for (MapperInfo mapperInfo : mapperInfos) {
+            hashSet.addAll(mapperInfo.getTableSet());
+        }
+
+        String[] tableArr = new String[hashSet.size()];
+        tableArr = hashSet.toArray(tableArr);
+
+        Arrays.sort(tableArr);
+
+        ExcelUtil.createRowAndCell(sheet2, 0, hashSet.size() + 1, 0, 1);
+
+        row = sheet2.getRow(0);
+        cell = row.getCell(0);
+        cell.setCellValue("TableName");
+        cell.setCellStyle(headStyle);
+
+        startRow = 1;
+        for (int i = startRow; i < startRow + tableArr.length; i++) {
+
+            Row currentRow = sheet2.getRow(i);
+            Cell cell1 = currentRow.getCell(0);
+            cell1.setCellValue(tableArr[i - startRow]);
+        }
+        sheet2.setDisplayGridlines(true);
+
+        // create sheet3
+        Sheet sheet3 = wb.createSheet("ProcSet");
+        sheet3.setColumnWidth(0, 36 * 256);
+
+        hashSet = new HashSet<>();
+        for (MapperInfo mapperInfo : mapperInfos) {
+            hashSet.addAll(mapperInfo.getProcSet());
+        }
+
+        tableArr = new String[hashSet.size()];
+        tableArr = hashSet.toArray(tableArr);
+
+        Arrays.sort(tableArr);
+
+        ExcelUtil.createRowAndCell(sheet3, 0, hashSet.size() + 1, 0, 1);
+
+        row = sheet3.getRow(0);
+        cell = row.getCell(0);
+        cell.setCellValue("ProcName");
+        cell.setCellStyle(headStyle);
+
+        startRow = 1;
+        for (int i = startRow; i < startRow + tableArr.length; i++) {
+
+            Row currentRow = sheet3.getRow(i);
+            Cell cell1 = currentRow.getCell(0);
+            cell1.setCellValue(tableArr[i - startRow]);
+        }
+        sheet3.setDisplayGridlines(true);
+
         FileOutputStream outFile = new FileOutputStream(path);
         wb.write(outFile);
         outFile.close();
